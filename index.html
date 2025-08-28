@@ -1,0 +1,39 @@
+<!-- Ai chatbot to used help very question -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai Chat Bot</title>
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+
+<body>
+    <h1 align="center">AI Chatbot Assistant</h1>
+    <div class="chat-container">
+        <div class="ai-chat-box">
+            <img src="robot-chatbot-generative-ai-free-png.webp" alt="" id="aiImage" width="10%">
+            <div class="ai-chat-area">
+                I'm Radha 2.0, how can i help you today?
+            </div>
+
+        </div>
+    </div>
+    <div class="prompt-area">
+        <input type="text" id="prompt" placeholder="Message...">
+        <button id="image"><img src="image.svg" alt="">
+            <input type="file" accept="images/*" hidden></button> <!-- used to  -->
+            
+        <!-- Add this inside your input area -->
+        <button id="mic" title="Speak">
+            <img src="download-removebg-preview.png" alt="Mic" width="24px">
+        </button>
+
+        <button id="submit"><img src="submit.svg" alt=""></button>
+    </div>
+    <script src="chatbot.js"></script>
+</body>
+
+</html>
