@@ -1,4 +1,4 @@
-# 🤖 AI-Powered Chatbot (HTML, CSS, JavaScript + Gemini API)
+# 🤖 AI-Powered Chatbot (HTML, CSS, JavaScript + Gemini API) Name - Radha 2.0 
 
 A **smart chatbot** built using **HTML, CSS, and JavaScript** with integration of **Gemini API** for  
 - 📝 Text replies  
@@ -36,6 +36,6 @@ The project highlights **AI + Web integration** and can serve as a base for futu
 
 ---
 
-If you like this project, consider giving it a **"STAR"** and sharing it with others!⭐
+If you like this project, consider giving it a **"STAR"** and sharing it with others! ⭐
 
 ---
