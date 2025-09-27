@@ -6,57 +6,57 @@ let imagebtn = document.querySelector("#image")  // image button work
 let image = document.querySelector("#image img")   
 let imageinput = document.querySelector("#image input")
 
-// Gemini api
-const Api_Url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyB9kYy2811nrGASvkf0bZtc_LwqUqiAipU"
+ // Gemini api
+        const Api_Url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
+        // user data defined null startind
+        let user = {
+            message: null,
+            file: {
+                mime_type: null,
+                data: null
+            }
+        };
 
-// user data defined null startind
-let user = {
-    message: null,  
-// copy code to gemini to image convert to text
-    file: {
-        mime_type: null,
-        data: null
-    }
-}
-
-// according to url generateResponse 
-async function generateResponse(aiChatBox) {
-
-    let text = aiChatBox.querySelector(".ai-chat-area")    // output ko text me convert kar dega
-    let RequestOption = {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            "contents": [
-                {                                     // user value null nahi hai toh user.file se data show output for user 
-                    "parts": [{ text: user.message }, (user.file.data ? [{ inline_data: user.file }] : [])
-
+        // according to url generateResponse
+        async function generateResponse(aiChatBox) {
+            let text = aiChatBox.querySelector(".ai-chat-area");
+            let RequestOption = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-goog-api-key': 'AIzaSyBdCOady2NcAovDqG4c1ULFocA1COvUBGw'
+                },
+                body: JSON.stringify({
+                    "contents": [
+                        {
+                            "parts": [
+                                { "text": user.message },
+                                ...(user.file.data ? [{ "inline_data": user.file }] : [])
+                            ]
+                        }
                     ]
-                }]
-        })
-    }
+                })
+            };
 
-//  add to display to output for user 
-    try {
-        let response = await fetch(Api_Url, RequestOption)
-        let data = await response.json()
+            //  add to display to output for user
+            try {
+                let response = await fetch(Api_Url, RequestOption);
+                let data = await response.json();
 
-// convet console to display output 
-        let apiResponse = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim()
-        text.innerHTML = apiResponse
-    }
-    catch (error) {
-        console.log(error);
-
-    }
-    finally {
-        chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: "smooth" })
-        image.src = `image.svg`
-        image.classList.remove("choose")
-        user.file = {}
-    }
-}
+                // convet console to display output
+                let apiResponse = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
+                text.innerHTML = apiResponse;
+            } catch (error) {
+                console.log(error);
+                text.innerHTML = "Error: Unable to generate response.";
+            } finally {
+                chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: "smooth" });
+                image.src = `image.svg`;
+                image.classList.remove("choose");
+                user.file = {};
+            }
+        }
 
 
 
