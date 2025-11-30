@@ -6,57 +6,61 @@ let imagebtn = document.querySelector("#image")  // image button work
 let image = document.querySelector("#image img")   
 let imageinput = document.querySelector("#image input")
 
- // Gemini api
-        const Api_Url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+ // Gemini api (replace with your own)
+ const Api_Url = "ADD_YOUR_API_URL_HERE"; // ← Replace with your API endpoint
 
-        // user data defined null startind
-        let user = {
-            message: null,
-            file: {
-                mime_type: null,
-                data: null
-            }
-        };
+ // user data defined null startind
+ let user = {
+     message: null,
+     file: {
+         mime_type: null,
+         data: null
+     }
+ };
 
-        // according to url generateResponse
-        async function generateResponse(aiChatBox) {
-            let text = aiChatBox.querySelector(".ai-chat-area");
-            let RequestOption = {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-goog-api-key': 'AIzaSyBdCOady2NcAovDqG4c1ULFocA1COvUBGw'
-                },
-                body: JSON.stringify({
-                    "contents": [
-                        {
-                            "parts": [
-                                { "text": user.message },
-                                ...(user.file.data ? [{ "inline_data": user.file }] : [])
-                            ]
-                        }
-                    ]
-                })
-            };
+ // according to url generateResponse
+ async function generateResponse(aiChatBox) {
+     let text = aiChatBox.querySelector(".ai-chat-area");
+     let RequestOption = {
+         method: "POST",
+         headers: {
+             'Content-Type': 'application/json',
+             // Replace the placeholder below with your own API key if required.
+             // Example: 'X-goog-api-key': 'YOUR_API_KEY_HERE'
+             'X-goog-api-key': 'ADD_YOUR_API_KEY_HERE'
+         },
+         body: JSON.stringify({
+             "contents": [
+                 {
+                     "parts": [
+                         { "text": user.message },
+                         ...(user.file.data ? [{ "inline_data": user.file }] : [])
+                     ]
+                 }
+             ]
+         })
+     };
 
-            //  add to display to output for user
-            try {
-                let response = await fetch(Api_Url, RequestOption);
-                let data = await response.json();
+     //  add to display to output for user
+     try {
+         let response = await fetch(Api_Url, RequestOption);
+         let data = await response.json();
 
-                // convet console to display output
-                let apiResponse = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
-                text.innerHTML = apiResponse;
-            } catch (error) {
-                console.log(error);
-                text.innerHTML = "Error: Unable to generate response.";
-            } finally {
-                chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: "smooth" });
-                image.src = `image.svg`;
-                image.classList.remove("choose");
-                user.file = {};
-            }
-        }
+         // convet console to display output
+         let apiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0].text
+             ? data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim()
+             : "No response from API.";
+         text.innerHTML = apiResponse;
+     } catch (error) {
+         console.log(error);
+         text.innerHTML = "Error: Unable to generate response.";
+     } finally {
+         chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: "smooth" });
+         image.src = `image.svg`;
+         image.classList.remove("choose");
+         user.file = {};
+     }
+ }
 
 
 
