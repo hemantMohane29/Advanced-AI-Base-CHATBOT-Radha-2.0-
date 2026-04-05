@@ -35,5 +35,5 @@ The project highlights **AI + Web integration** and can serve as a base for futu
 - 📧 Email: [hemantmohane29@gmail.com](mailto:hemantmohane29@gmail.com)  
 
 ---
-If you like this project, consider giving it a **"STAR"** and sharing it with others! ⭐
+If you like this project, consider giving it a **"STAR"** and sharing it with others!⭐
 ---
